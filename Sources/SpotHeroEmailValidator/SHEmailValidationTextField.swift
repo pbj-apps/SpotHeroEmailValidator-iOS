@@ -15,7 +15,8 @@
         public var messageForSuggestion: String?
         public var validationError: Error?
         public var containerResolver: ((UIView) -> UIView)?
-    
+        public var onSuggestionAccepted: ((String?) -> Void)?
+
         public var bubbleFillColor: UIColor? {
             didSet {
                 self.suggestionView?.fillColor = self.bubbleFillColor
@@ -137,6 +138,7 @@
         public func suggestionView(_ suggestionView: SHAutocorrectSuggestionView, wasDismissedWithAccepted accepted: Bool) {
             if accepted {
                 self.text = suggestionView.suggestedText
+                onSuggestionAccepted?(suggestionView.suggestedText)
             }
         }
     }
