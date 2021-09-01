@@ -53,7 +53,7 @@
                                 autocorrectSuggestion suggestion: String?,
                                 withSetupBlock block: SetupBlock?) -> SHAutocorrectSuggestionView {
             return SHAutocorrectSuggestionView.show(from: target,
-																										inContainerView: target.superview?.superview ?? target.superview,
+																										inContainerView: target.superview,
                                                     title: title,
                                                     autocorrectSuggestion: suggestion,
                                                     withSetupBlock: block)

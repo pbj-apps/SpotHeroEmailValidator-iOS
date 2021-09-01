@@ -14,6 +14,7 @@
         public var defaultErrorMessage: String?
         public var messageForSuggestion: String?
         public var validationError: Error?
+        public var containerResolver: ((UIView) -> UIView)?
     
         public var bubbleFillColor: UIColor? {
             didSet {
@@ -94,7 +95,7 @@
                 self.validationError = nil
             
                 if let autocorrectSuggestion = validationResult?.autocorrectSuggestion {
-                    self.suggestionView = SHAutocorrectSuggestionView.show(from: self,
+                    self.suggestionView = SHAutocorrectSuggestionView.show(from: containerResolver?(self) ?? self,
                                                                            title: self.messageForSuggestion,
                                                                            autocorrectSuggestion: autocorrectSuggestion,
                                                                            withSetupBlock: { [weak self] view in
@@ -114,7 +115,7 @@
                     message = self.defaultErrorMessage
                 }
 
-                self.suggestionView = SHAutocorrectSuggestionView.show(from: self,
+                self.suggestionView = SHAutocorrectSuggestionView.show(from: containerResolver?(self) ?? self,
                                                                        title: message,
                                                                        autocorrectSuggestion: nil,
                                                                        withSetupBlock: { [weak self] view in
